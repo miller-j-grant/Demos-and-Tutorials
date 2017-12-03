@@ -1,0 +1,84 @@
+<!-- Author: Grant Miller -->
+<!-- This is a demo file of the very basics of JQuery functionality. -->
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<script src="jquery-3.2.1.js"></script>
+<script>
+$(document).ready(function(){
+	$("#hideParagraphs").click(function(){
+		$("p").hide();
+	});
+	$("#hideSpecificID").click(function(){
+		$("#hideID").hide();
+	});
+	$("#showDiv1").click(function(){
+		$("#div1").children().show();
+	});
+	$("#hideSpecificClass").click(function(){
+		$(".class1").hide();
+	});
+	$("#hideAllElementsDiv2").click(function(){
+		$("#div2").children().hide();
+	});
+	$("#showDiv2").click(function(){
+		$("#div2").children().show()
+	});
+	$("#alertParagraph").on({
+		mouseenter: function(){
+        	$(this).css("background-color", "red");
+    	},
+    	click: function(){
+    		alert("You have clicked the ALERT PARAGRAPH!");
+    		$(this).slideUp(1000).slideDown(1000);
+    	}
+    });
+    $("#makeDiv1Fade").click(function(){
+    	$("#div1").fadeToggle();
+    });
+    $("#appendButton").click(function(){
+    	var txt = $("<p></p>").text("Text.");
+    	$("#div2").append(txt);
+    });
+    $("#changeparents").click(function(){
+    	$(this).parents().css({"color": "green", "border": "2px solid green"});
+    });
+});
+</script>
+</head>
+
+<body>
+<div id="div1">
+<h1 class="class1">This is a Heading element.</h1>
+
+<p>This is a Paragraph element.</p>
+<p id="hideID">This is yet another Paragraph element.</p>
+</div>
+
+<div id="div2">
+<h2>This is another Heading element.</h2>
+<button>N/A</button>
+</div>
+
+<button id="hideParagraphs">Click to hide Paragraph elements.</button>
+<button id="hideSpecificID">Click to hide Paragraph with ID "hideID".</button>
+<button id="hideSpecificClass">Click to hide element with Class "class1".</button>
+
+<button id="hideAllElementsDiv2">Click to hide all elements in div2.</button>
+
+<button id="makeDiv1Fade">Click to fade elements in div1.</button>
+
+<button id="showDiv1">Click to make ALL elements in div1 visible again.</button>
+<button id="showDiv2">Click to make ALL elements in div2 visibile again.</button>
+
+<button id="appendButton">Click to append to div2.</button>
+
+<div>
+<button id="changeParents">Click to change css of parents of this button</button>
+</div>
+
+<p id="alertParagraph">THIS IS THE ALERT PARAGRAPH!</p>
+</body>
+</html>
