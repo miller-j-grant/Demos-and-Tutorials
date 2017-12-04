@@ -1,0 +1,80 @@
+@{Layout = "layout.cshtml";}
+
+<!-- Single statement block -->
+@{var message = "ASP is cool!";}
+
+<!-- Inline expression or variable -->
+<p>The value of the message variable is: @message</p>
+
+<!-- Multi-statement block -->
+@{
+	var greeting = "Welcome to this web page.";
+	var weekDay = DateTime.Now.DayOfWeek;
+	var greetingMessage = greeting + " Today is " + weekDay;
+}
+
+<p>Salutations! @greetingMessage</p>
+
+@{
+	if(IsPost){
+		string firstName = Request["FirstName"];
+		string lastName = Request["LastName"];
+		<br>
+		<p>Your name is @firstName @lastName</p>
+		<br>
+	}
+	else{
+		<form method="post" action="">
+		First Name:
+		<br>
+		<input type="text" name="FirstName" value="">
+		<br>
+		Last Name:
+		<br><br>
+		<input type="text" name="LastName" value="">
+		<br><br>
+		<input type="submit" value="Submit" class="submit">
+		</form>
+	}
+}
+
+@{
+	var imagePath = "";
+	if(Request["Choice"] != null){
+		imagePath = "Images/" + Request["Choice"];
+	}
+}
+
+<br>
+<p>If you want to learn about some basic Music Theory, check out these images!</p>
+<br>
+
+<form method="post" action="">
+I want to see:
+<select name="Choice">
+	<option value="picture1.jpg">Picture 1</option>
+	<option value="picture2.jpg">Picture 2</option>
+	<option value="picture3.png">Picture 3</option>
+	<option value="picture4.png">Picture 4</option>
+	<option value="picture5.png">Picture 5</option>
+	<option value="picture6.png">Picture 6</option>
+</select>
+<input type="submit" value="Submit">
+@if(imagePath != ""){
+	<p><image src="@imagePath" alt="Sample"></p>
+}
+</form>
+
+@{
+	var dataFile = Server.MapPath("~/App_Data/albums.txt");
+	Array userData = File.ReadAllLines(dataFile);
+}
+
+<p>Do you wanna know some of my favorite albums and bands? Well here they are (read from a .txt file)!</p>
+
+@foreach(string dataLine in userData){
+	foreach(string dataItem in dataLine.Split(',')){
+		@dataItem <text>&nbsp;</text>
+	}
+	<br>
+}
